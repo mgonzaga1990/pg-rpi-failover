@@ -1,0 +1,30 @@
+
+version: '2'
+
+services:
+  pg-master:
+    build: '.'
+    image: 'mjayson/rpi-pg'
+    restart: 'always'
+    environment:
+      PGUSER: 'postgres'
+      PGPASS: 'postgres'
+      PGDB: 'postgres'
+    expose:
+     - '5432'
+
+  pg-slave:
+    build: '.'
+    image: 'mjayson/rpi-pg'
+    restart: 'always'
+    depends_on:
+      - pg-master
+    environment:
+      PGUSER: 'postgres'
+      PGPASS: 'postgres'
+      PGDB: 'postgres'
+      MASTER_HOST: 'pg-master'
+    expose:
+     - '5432'
+    links:
+     - 'pg-master'

@@ -1,0 +1,1 @@
+https://blog.raveland.org/post/postgresql_repmgr_pgbouncer_en/
